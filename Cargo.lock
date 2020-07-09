@@ -981,13 +981,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "my"
-version = "0.1.0"
-dependencies = [
- "orbtk 0.3.1-alpha3",
-]
-
-[[package]]
 name = "ndk"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"

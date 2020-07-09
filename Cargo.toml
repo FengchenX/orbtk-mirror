@@ -61,5 +61,8 @@ members = [
     "crates/shell",
     "crates/theme",
     "crates/widgets",
-    "work/my",
 ]
+
+[[bin]]
+name = "bin1"
+path = "bin/my/main.rs"
