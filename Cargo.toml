@@ -64,5 +64,8 @@ members = [
 ]
 
 [[bin]]
-#name = "bin1"
-#path = "bin/my/main.rs"
+name = "bin1"
+path = "bin/my/main.rs"
+[[bin]]
+name = "bin2"
+path = "bin/alg/main.rs"
