@@ -27,12 +27,31 @@ fn quick_sort<T:PartialOrd+Copy>(arr: &mut [T], start: usize, end:usize) {
     }
 }
 
-fn merge_sort<T:PartialOrd>(arr: &[T]) -> &[T] {
+fn merge_sort<T:PartialOrd+Copy>(arr: &[T]) -> &[T] {
     if arr.len()<2 {
         return arr;
     }
     let i = arr.len()/2;
-    arr
+    let mut left = merge_sort(&arr[0..i]);
+    let mut right = merge_sort(&arr [i..]);
+    merge(&mut left,&mut right)
+}
+fn merge<'a,T:PartialOrd+Copy>(left: &'a mut [T], right: &'a mut [T]) ->&'a [T]{
+    let mut result = Vec::new();
+    let (mut m,mut n)=(0,0);
+    let (l,r)=(left.len(),right.len());
+    while m<l&&n<r {
+        if left[m]>right[n] {
+           result.push(right[n]);
+            n+=1;
+            continue;
+        }
+        result.push(left[m]);
+        m+=1;
+    }
+    result.append(&mut right[n..].to_vec());
+    result.append(&mut left[m..].to_vec());
+    result.as_slice()
 }
 
 
@@ -41,5 +60,6 @@ pub fn test() {
     let b = a.len()-1;
     quick_sort(&mut a, 0, b);
     println!("{:?}",a);
+    println!("{:?}", merge_sort(&mut a));
 }
 
