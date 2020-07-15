@@ -1,6 +1,7 @@
 
 
 use std::cmp::PartialOrd;
+
 fn quick_sort<T:PartialOrd+Copy>(arr: &mut [T], start: usize, end:usize) {
     if start < end {
         let base = arr[start];
@@ -27,31 +28,47 @@ fn quick_sort<T:PartialOrd+Copy>(arr: &mut [T], start: usize, end:usize) {
     }
 }
 
-fn merge_sort<T:PartialOrd+Copy>(arr: &[T]) -> &[T] {
+fn merge_sort<T:PartialOrd+Copy+std::fmt::Debug>(arr: &mut [T]) -> &mut [T] {
     if arr.len()<2 {
         return arr;
     }
     let i = arr.len()/2;
-    let mut left = merge_sort(&arr[0..i]);
-    let mut right = merge_sort(&arr [i..]);
-    merge(&mut left,&mut right)
+    let mut a1:Vec<T> = Vec::new();
+    let mut a2:Vec<T> =Vec::new();
+    for k in 0..i{
+        a1.push(arr[k]);
+    }
+    for k in i..arr.len() {
+        a2.push(arr[k]);
+    }
+
+    let mut left = merge_sort(a1.as_mut_slice());
+    let mut right = merge_sort(a2.as_mut_slice());
+    let mut result: Vec<T> = Vec::new();
+    merge(&mut left,&mut right,&mut result);
+    for k in 0..arr.len(){
+        if let Some(v) = result.get(k){
+            arr[k]=*v;
+        }
+    }
+
+    arr
 }
-fn merge<'a,T:PartialOrd+Copy>(left: &'a mut [T], right: &'a mut [T]) ->&'a [T]{
-    let mut result = Vec::new();
+
+fn merge<T:PartialOrd+Copy+std::fmt::Debug>(left: &mut [T], right: &mut [T], result: &mut Vec<T>){
     let (mut m,mut n)=(0,0);
     let (l,r)=(left.len(),right.len());
     while m<l&&n<r {
         if left[m]>right[n] {
            result.push(right[n]);
-            n+=1;
-            continue;
+            n=n+1;
+        } else {
+            result.push(left[m]);
+            m=m+1;
         }
-        result.push(left[m]);
-        m+=1;
     }
     result.append(&mut right[n..].to_vec());
     result.append(&mut left[m..].to_vec());
-    result.as_slice()
 }
 
 
@@ -60,6 +77,6 @@ pub fn test() {
     let b = a.len()-1;
     quick_sort(&mut a, 0, b);
     println!("{:?}",a);
-    println!("{:?}", merge_sort(&mut a));
+    println!("#########{:?}", merge_sort(&mut a));
 }
 
