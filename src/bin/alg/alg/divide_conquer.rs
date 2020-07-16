@@ -1,5 +1,42 @@
 
 
+/*
+递归模板
+func recursion(level int,parm1,parm2...) parm{
+  // terminator 终止条件
+  if xxx {
+    return XXX
+  }
+
+  // process 本层要处理的东西
+  xxxxxxx
+
+  // trill down 往下一层输入的信息
+  recursion(level+1,parmNew1,parmNew2)
+
+  // clear states  可选，递归返回的时候要处理的东西
+  xxxxxxx
+}
+
+分治模板
+func DivideConquer(problem,parm) parm  {
+  // 判断问题是否结束
+  if problem == nil {
+    return result
+  }
+  // 开始准备数据，拆分数据
+  data := prepareProblem(problem,parm)
+  sonProblem := splitProblem(problem,data)
+  // 开始执行往下一层的递归任务
+  p1  := DivideConquer(sonProblem[0])
+  p2  := DivideConquer(sonProblem[1])
+  p3  := DivideConquer(sonProblem[2])
+  p4  := DivideConquer(sonProblem[3])
+}
+// 开始合并这几个子问题
+return merge(p1,p2,p3,p4)
+*/
+
 use std::cmp::PartialOrd;
 
 fn quick_sort<T:PartialOrd+Copy>(arr: &mut [T], start: usize, end:usize) {

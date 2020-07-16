@@ -1,5 +1,6 @@
 
 
+
 pub fn strStr(haystack: String, needle: String) ->i32{
     if needle.len()==0{
         return 0;
