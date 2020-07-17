@@ -6,4 +6,5 @@ pub use crate::{
     alg::binary_search::test,
     alg::divide_conquer::test as quick,
     alg::hash_table::two_sum_test,
+    alg::two_pointer::test as three_sum,
 };

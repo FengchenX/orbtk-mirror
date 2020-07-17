@@ -8,7 +8,7 @@ type TreeNode<T> = Option<Box<T>>;
 
 
 fn main(){
-   two_sum_test();
+    three_sum();
 }
 
 
