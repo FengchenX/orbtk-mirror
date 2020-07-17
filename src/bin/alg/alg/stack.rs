@@ -47,11 +47,19 @@ fn is_vaild(s: String) ->bool{
             }
             let top = ret.pop();
             if let Some(c) = top {
-                if char != m[c] {
+                if char != m[&c] {
                    return false
                 }
             }
         }
     }
     true
+}
+
+pub fn test() {
+    println!("{}", is_vaild(String::from("()")));
+    println!("{}", is_vaild(String::from("()[]{}")));
+    println!("{}", is_vaild(String::from("(]")));
+    println!("{}", is_vaild(String::from("([)]")));
+    println!("{}", is_vaild(String::from("{[]}")));
 }
