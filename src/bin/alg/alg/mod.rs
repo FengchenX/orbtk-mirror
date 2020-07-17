@@ -1,3 +1,4 @@
+pub mod stack;
 pub mod two_pointer;
 pub mod hash_table;
 pub mod divide_conquer;
