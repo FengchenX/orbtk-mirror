@@ -8,4 +8,5 @@ pub use crate::{
     alg::hash_table::two_sum_test,
     alg::two_pointer::test as three_sum,
     alg::stack::test as stack,
+    alg::linked_list::test as linked_list,
 };
