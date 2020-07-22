@@ -8,7 +8,7 @@ type TreeNode<T> = Option<Box<T>>;
 
 
 fn main(){
-    pruning();
+    linked_list2();
 }
 
 
