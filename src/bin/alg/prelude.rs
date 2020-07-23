@@ -10,5 +10,6 @@ pub use crate::{
     alg::stack::test as stack,
     alg::linked_list::test as linked_list,
     alg::linked_list::test2 as linked_list2,
+    alg::linked_list::test3 as linked_list3,
     alg::pruning::test as pruning,
 };
