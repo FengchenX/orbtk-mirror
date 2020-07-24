@@ -132,7 +132,7 @@ fn reverse_k_group(head: Opt<ListNode>, k: i32) -> Opt<ListNode> {
     while let Some(mut node) = head.take() {
         head = node.next.take();
         tmp.push(node);
-        while tmp.len() == k as usize {
+        if tmp.len() == k as usize {
             while tmp.len()>0 {
                 *prev = tmp.pop();
                 prev = &mut prev.as_mut().unwrap().next;
