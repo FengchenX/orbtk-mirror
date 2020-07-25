@@ -8,7 +8,7 @@ type TreeNode<T> = Option<Box<T>>;
 
 
 fn main(){
-    linked_list3();
+  hash_table();
 }
 
 
