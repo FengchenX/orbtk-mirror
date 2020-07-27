@@ -52,3 +52,75 @@ fn back_trace(s: String, n: usize, right: usize, left: usize, result: &mut Vec<S
 pub fn test() {
     println!("{:?}", generate_parenthesis(3));
 }
+
+
+/*
+37. 解数独
+编写一个程序，通过已填充的空格来解决数独问题。
+
+一个数独的解法需遵循如下规则：
+
+数字 1-9 在每一行只能出现一次。
+数字 1-9 在每一列只能出现一次。
+数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+空白格用 '.' 表示。
+
+一个数独。
+答案被标成红色。
+Note:
+给定的数独序列只包含数字 1-9 和字符 '.' 。
+你可以假设给定的数独只有唯一解。
+给定数独永远是 9x9 形式的。
+*/
+
+fn solve_sudoku(board: &mut Vec<Vec<char>>) {
+    let mut row = vec![vec![false;9];9];
+    let mut col = vec![vec![false;9];9];
+    let mut block = vec![vec![false;9];9];
+    let mut rest = vec![];
+    for i in 0..9{
+        for j in 0..9{
+           match board[i][j] {
+               '.' => rest.push((i,j)),
+               _ =>{
+                   let n = (board[i][j] as u8 - b'1') as usize;
+                   row[j][n] = true;
+                   col[j][n] = true;
+                   col[i/3*3+j/3][n] = true;
+               }
+           }
+        }
+    }
+    dfs(board, &rest, &mut row, &mut col, &mut block);
+}
+
+fn dfs(
+    board: &mut Vec<Vec<char>>,
+    rest: &[(usize,usize)],
+    row: &mut Vec<Vec<bool>>,
+    col: &mut Vec<Vec<bool>>,
+    block: &mut Vec<Vec<bool>>
+) -> bool {
+    if let Some((i,j)) = rest.first() {
+         let (i, j) = (*i,*j);
+        let n_block = i/3*3+j/3;
+        for x in 0..9 {
+            if !row[i][x] && !col[j][x]&&!block[n_block][x] {
+                row[i][x] = true;
+                col[j][x] = true;
+                block[n_block][x]=true;
+
+                board[i][j] = (x as u8 + b'1') as char;
+                if dfs(board, &rest[1..], row, col, block) {
+                    return true;
+                }
+                row[i][x] = false;
+                col[j][x] = false;
+                block[n_block][x] = false;
+            }
+        }
+        false
+    } else {
+        true
+    }
+}
