@@ -1,4 +1,5 @@
 use crate::prelude::*;
+use orbtk::prelude::HashMap;
 
 pub mod prelude;
 pub mod alg;
