@@ -84,9 +84,9 @@ fn solve_sudoku(board: &mut Vec<Vec<char>>) {
                '.' => rest.push((i,j)),
                _ =>{
                    let n = (board[i][j] as u8 - b'1') as usize;
-                   row[j][n] = true;
+                   row[i][n] = true;
                    col[j][n] = true;
-                   col[i/3*3+j/3][n] = true;
+                   block[i/3*3+j/3][n] = true;
                }
            }
         }
@@ -102,9 +102,9 @@ fn dfs(
     block: &mut Vec<Vec<bool>>
 ) -> bool {
     if let Some((i,j)) = rest.first() {
-         let (i, j) = (*i,*j);
-        let n_block = i/3*3+j/3;
+        let (i, j) = (*i,*j);
         for x in 0..9 {
+            let n_block = i/3*3+j/3;
             if !row[i][x] && !col[j][x]&&!block[n_block][x] {
                 row[i][x] = true;
                 col[j][x] = true;
@@ -123,4 +123,23 @@ fn dfs(
     } else {
         true
     }
+}
+
+
+pub fn  test2() {
+    let mut board2 = vec![
+        vec!['5','3','.','.','7','.','.','.','.'],
+        vec!['6','.','.','1','9','5','.','.','.'],
+        vec!['.','9','8','.','.','.','.','6','.'],
+        vec!['8','.','.','.','6','.','.','.','3'],
+        vec!['4','.','.','8','.','3','.','.','1'],
+        vec!['7','.','.','.','2','.','.','.','6'],
+        vec!['.','6','.','.','.','.','2','8','.'],
+        vec!['.','.','.','4','1','9','.','.','5'],
+        vec!['.','.','.','.','8','.','.','7','9']
+    ];
+
+    solve_sudoku(&mut board2);
+
+    println!("{:?}", board2);
 }

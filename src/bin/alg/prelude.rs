@@ -13,4 +13,5 @@ pub use crate::{
     alg::linked_list::test2 as linked_list2,
     alg::linked_list::test3 as linked_list3,
     alg::pruning::test as pruning,
+    alg::pruning::test2 as pruning2,
 };
