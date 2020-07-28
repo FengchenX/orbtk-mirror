@@ -9,6 +9,6 @@ type TreeNode<T> = Option<Box<T>>;
 
 
 fn main(){
-    pruning2();
+    quick2();
 }
 

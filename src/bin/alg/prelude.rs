@@ -5,6 +5,7 @@ pub use crate::{
     alg::preorderTraversal::test_insert,
     alg::binary_search::test,
     alg::divide_conquer::test as quick,
+    alg::divide_conquer::test2 as quick2,
     alg::hash_table::two_sum_test,
     alg::hash_table::test2 as hash_table,
     alg::two_pointer::test as three_sum,

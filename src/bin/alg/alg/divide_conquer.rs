@@ -149,15 +149,14 @@ fn my_pow(x: f64, n: i32) -> f64 {
     if n==0{
         return 1f64;
     }
-    while n !=1 {
-       if n%2 == 1{
-           pow=pow*x;
-       }
-        n=n/2;
-        x=x*x;
-        if x==0f64 ||x==1.0f64{
-            break;
-        }
+    if n%2!=0{
+        return x*my_pow(x, n-1)
     }
-    pow*x
+    my_pow(x*x, n/2)
+}
+
+pub fn test2() {
+    println!("{}", my_pow(2.00,10));
+    println!("{}", my_pow(2.10,3));
+    println!("{}", my_pow(2.00,-2));
 }
