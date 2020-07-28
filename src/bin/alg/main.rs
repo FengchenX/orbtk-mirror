@@ -12,6 +12,3 @@ fn main(){
     pruning2();
 }
 
-
-
-
