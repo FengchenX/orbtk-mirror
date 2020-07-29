@@ -1,3 +1,5 @@
+pub mod array;
+pub mod bit_operations;
 pub mod pruning;
 pub mod linked_list;
 pub mod stack;
