@@ -145,7 +145,6 @@ fn my_pow(x: f64, n: i32) -> f64 {
     let (mut x, mut n) = if n<0{
         (1f64/x, -n)
     } else { (x,n) };
-    let mut pow =1f64;
     if n==0{
         return 1f64;
     }

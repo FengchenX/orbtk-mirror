@@ -26,6 +26,9 @@ def backtrack(路径, 选择列表):
      ]
 */
 
+use orbtk::prelude::HashMap;
+use std::fs::copy;
+
 fn generate_parenthesis(n: i32) ->Vec<String> {
     let mut result = vec![];
     back_trace(String::new(), n as usize, 0,0, &mut result);
@@ -143,3 +146,103 @@ pub fn  test2() {
 
     println!("{:?}", board2);
 }
+
+
+/*
+51. N皇后
+n 皇后问题研究的是如何将 n 个皇后放置在 n×n 的棋盘上，并且使皇后彼此之间不能相互攻击。
+上图为 8 皇后问题的一种解法。
+给定一个整数 n，返回所有不同的 n 皇后问题的解决方案。
+每一种解法包含一个明确的 n 皇后问题的棋子放置方案，该方案中 'Q' 和 '.' 分别代表了皇后和空位。
+示例:
+输入: 4
+输出: [
+ [".Q..",  // 解法 1
+  "...Q",
+  "Q...",
+  "..Q."],
+
+ ["..Q.",  // 解法 2
+  "Q...",
+  "...Q",
+  ".Q.."]
+]
+解释: 4 皇后问题存在两个不同的解法。
+提示：
+皇后，是国际象棋中的棋子，意味着国王的妻子。皇后只做一件事，那就是“吃子”。当她遇见可以吃的棋子时，就迅速冲上去吃掉棋子。当然，她横、竖、斜都可走一到七步，可进可退。（引用自 百度百科 - 皇后 ）
+*/
+
+
+/*
+queens(0) = [[]]
+queens(n) = [ [new_queen, ...sol] | sol in queens(n-1),
+                                    new_queen in [0..size],
+                                    check(new_queen, sol)]
+*/
+fn solve_n_queens(n: i32) -> Vec<Vec<Vec<char>>> {
+    let n = n as usize;
+    let mut mPie = HashMap::new();
+    let mut mNa = HashMap::new();
+    let mut mCol = HashMap::new();
+    let mut result =  vec![];
+    let re = vec![];
+    mo(&mut mPie, &mut mNa, &mut mCol, &mut result, re, n, 0);
+    result
+}
+
+fn mo(
+    mPie: &mut HashMap<i32, usize>,
+    mNa: &mut HashMap<i32, usize>,
+    mCol: &mut HashMap<i32,usize>,
+    result: &mut Vec<Vec<Vec<char>>>,
+    re: Vec<Vec<char>>,
+    n: usize,
+    row: usize
+) {
+    let row = row as i32;
+    let n = n as i32;
+    if row>n-1 {
+        result.push(re);
+        return
+    }
+    for i in 0..n{
+        if mPie.contains_key(&(row-i)) && mPie[&(row-i)] !=0 {
+            continue;
+        }
+        if mNa.contains_key(&(row+i)) && mNa[&(row+i)] !=0 {
+            continue;
+        }
+        if mCol.contains_key(&i) && mCol[&i] !=0 {
+            continue;
+        }
+        let x = mPie.entry(row - i).or_insert(0);
+        *x +=1;
+        let x1 = mNa.entry(row + i).or_insert(0);
+        *x1+=1;
+        let x2 = mCol.entry(i).or_insert(0);
+        *x2 +=1;
+        let mut b = re.clone();
+        b.push(ddtt(i as usize,n as usize));
+        mo(mPie,mNa,mCol,result, b,n as usize,(row+1) as usize);
+        mPie.insert(row-i,0);
+        mNa.insert(row+i,0);
+        mCol.insert(i,0);
+    }
+}
+
+fn ddtt(i:usize,n:usize) ->Vec<char> {
+    let mut res = vec![];
+    for j in 0..n{
+        if j != i {
+            res.push('.')
+        } else {
+            res.push('Q')
+        }
+    }
+    res
+}
+
+pub fn test3(){
+    println!("{:?}",solve_n_queens(4));
+}
+
