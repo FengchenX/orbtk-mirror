@@ -26,3 +26,7 @@ board 和 word 中只包含大写和小写英文字母。
 通过次数73,403提交次数174,090
 */
 
+
+fn exist(board: Vec<Vec<char>>, word: String) -> bool {
+
+}
