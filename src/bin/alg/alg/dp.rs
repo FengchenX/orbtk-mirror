@@ -1,4 +1,19 @@
 
+/*
+func DP(){
+  // 状态的定义 一般是设置一个二维或者一维或者三维的数组
+  dp = [m][n]int{}
+  // 初始化这个数组 例如把第一层都手动加上好数据
+  dp[1] = xxxx
+  // 开始动态推演
+  for i := 0;i <= m;i++ {
+    for j := 0;j <= n ;j++ {
+        dp [i][j] = min{dp[i-1][j],dp[i][j-1]} // 这里仅仅作为事例。
+       }
+    }
+    return dp[m][n] // 一般都是这个矩阵的最右边的那个是最优解或者是最左上角的那个是也就是dp[0][0] 这个就是最优解了。
+}
+*/
 
 /*
 70. 爬楼梯
@@ -25,6 +40,32 @@
 3.  2 阶 + 1 阶
 */
 
-fn climb_stairs(n: i32) -> i32 {
+/*
+思路： 本题是一个动态规划题，状态转移方程为 dp[n] = dp[n-1] + dp[n-2];
+即到达第n阶的方法方法数是到底第n-1阶的方法数(上升1步) + 到底第n-2阶方法数之和(上升2步))。
+但其本质即为fibonacci数列，所有可采用简单的迭代方法求解
+*/
 
+fn climb_stairs(n: i32) -> i32 {
+    let mut a =1;
+    let mut b =1;
+    let mut cur = 1;
+    for i in 2..(n+1) {
+        cur = a+b;
+        a = b;
+        b = cur;
+    }
+    cur
+}
+
+
+#[cfg(test)]
+mod test {
+    use super::*;
+
+    #[test]
+    fn test_climb_stairs() {
+        assert_eq!(climb_stairs(2), 2);
+        assert_eq!(climb_stairs(3), 3);
+    }
 }

@@ -1,3 +1,4 @@
+pub mod trie;
 pub mod dp;
 pub mod array;
 pub mod bit_operations;
