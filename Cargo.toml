@@ -40,6 +40,7 @@ calamine = "0.16.1"
 grpc            = "~0.8"
 protobuf        = "~2"
 futures         = "~0.3"
+protoc-rust-grpc = "~0.8"
 
 [dev-dependencies]
 euc = "0.5.0"
