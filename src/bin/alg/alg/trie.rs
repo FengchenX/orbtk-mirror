@@ -143,4 +143,23 @@ fn check(
     return false;
 }
 
+#[cfg(test)]
+mod test {
+    use super::*;
+
+   #[test]
+   fn test_exist() {
+
+        let board = vec![
+                vec!['A','B','C','E'],
+                vec!['S','F','C','S'],
+                vec!['A','D','E','E']
+            ];
+
+        assert_eq!(exist(board.clone(), String::from("ABCCED")), true);
+        assert_eq!(exist(board.clone(), String::from("SEE")), true);
+        assert_eq!(exist(board.clone(), String::from("ABCB")), false);
+   }
+}
+
 
