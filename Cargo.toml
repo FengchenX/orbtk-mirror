@@ -17,6 +17,8 @@ keywords = [
 ]
 edition = "2018"
 
+build="build.rs"
+
 [lib]
 name = "orbtk"
 path = "src/lib.rs"
@@ -37,10 +39,9 @@ orbtk-widgets = { version = "0.3.1-alpha3", path="crates/widgets" }
 dces = { git = "https://gitlab.redox-os.org/redox-os/dces-rust.git",  branch = "develop" }
 simple_excel_writer = "0.1.7"
 calamine = "0.16.1"
-grpc            = "~0.8"
-protobuf        = "~2"
-futures         = "~0.3"
-protoc-rust-grpc = "~0.8"
+tonic = "0.3"
+prost = "0.6"
+tokio = { version = "0.2", features = ["macros"] }
 
 [dev-dependencies]
 euc = "0.5.0"
@@ -49,7 +50,7 @@ serde = "1.0.106"
 serde_derive = "1.0.106"
 
 [build-dependencies]
-protoc-rust-grpc = "~0.8"
+tonic-build = "0.3.0"
 
 # [target.'cfg(all(not(target_arch = "wasm32"), not(target_os = "redox")))'.dev-dependencies]
 # wgpu = "0.5.0"
@@ -74,7 +75,15 @@ members = [
 
 [[bin]]
 name = "bin1"
-path = "bin/my/main.rs"
+path = "src/bin/my/main.rs"
 [[bin]]
 name = "bin2"
-path = "bin/alg/main.rs"
+path = "src/bin/alg/main.rs"
+
+[[bin]] # Bin to run the HelloWorld gRPC server
+name = "helloworld-server"
+path = "src/bin/test/server.rs"
+
+[[bin]] # Bin to run the HelloWorld gRPC client
+name = "helloworld-client"
+path = "src/bin/test/client.rs"
